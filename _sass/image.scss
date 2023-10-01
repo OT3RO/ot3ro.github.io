@@ -1,0 +1,7 @@
+/* Establece el ancho máximo para todas las imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+  display: inline;
+  margin: 0 auto; /* Centra horizontalmente la imagen */
+}

