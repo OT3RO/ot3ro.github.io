@@ -1,7 +1,7 @@
 ---
 layout: single
 title: Dropzone - Hack The Box
-excerpt: "Dropzone es una máquina con sistema operativo Windows XP, caracterizada por su control de permisos limitado en la interacción del usuario. Este control limitado permite llevar a cabo operaciones de transferencia de archivos a través del protocolo TFTP (GET y PUT) sin imponer restricciones severas. Esta configuración especial habilita la carga de archivos MOF, lo que a su vez posibilita la interacción con WMI y la ejecución de scripts con privilegios del sistema. Además, permite generar payloads de reverseshell hacia nuestro propio host, una táctica que recuerda a la utilizada previamente por el infame gusano Stuxnet. Al final del recorrido, se plantea un desafiante ejercicio de descubrimiento de flujos de datos en el sistema de archivos NTFS."
+excerpt: "Dropzone es una máquina con sistema operativo Windows XP, caracterizada por su control de permisos limitado en la interacción del usuario. Este control limitado permite llevar a cabo operaciones de transferencia de archivos a través del protocolo TFTP (GET y PUT) sin imponer restricciones severas. Esta configuración especial habilita la carga de archivos MOF, lo que a su vez posibilita la interacción con WMI y la ejecución de scripts con privilegios del sistema. Además, permite generar payloads de reverseshell hacia nuestro propio host, una táctica que recuerda a la utilizada previamente por el malware Stuxnet. Al final del recorrido, se plantea un desafiante ejercicio de descubrimiento de flujos de datos en el sistema de archivos NTFS."
 date: 2023-09-29
 classes: wide
 header:
@@ -20,7 +20,7 @@ tags:
 ![](/assets/images/htb-writeup-dropzone/dropzone_logo.png)
 
 
-"Dropzone es una máquina con sistema operativo Windows XP, caracterizada por su control de permisos limitado en la interacción del usuario. Este control limitado permite llevar a cabo operaciones de transferencia de archivos a través del protocolo TFTP (GET y PUT) sin imponer restricciones severas. Esta configuración especial habilita la carga de archivos MOF, lo que a su vez posibilita la interacción con WMI y la ejecución de scripts con privilegios del sistema. Además, permite generar payloads de reverseshell hacia nuestro propio host, una táctica que recuerda a la utilizada previamente por el infame gusano Stuxnet. Al final del recorrido, se plantea un desafiante ejercicio de descubrimiento de flujos de datos en el sistema de archivos NTFS."
+"Dropzone es una máquina con sistema operativo Windows XP, caracterizada por su control de permisos limitado en la interacción del usuario. Este control limitado permite llevar a cabo operaciones de transferencia de archivos a través del protocolo TFTP (GET y PUT) sin imponer restricciones severas. Esta configuración especial habilita la carga de archivos MOF, lo que a su vez posibilita la interacción con WMI y la ejecución de scripts con privilegios del sistema. Además, permite generar payloads de reverseshell hacia nuestro propio host, una táctica que recuerda a la utilizada previamente por el malware Stuxnet. Al final del recorrido, se plantea un desafiante ejercicio de descubrimiento de flujos de datos en el sistema de archivos NTFS."
 
 ## <span style="color: yellow;">Enumeración</span>
 
