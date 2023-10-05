@@ -18,8 +18,8 @@ tags:
   - local file inclusion
   - file system configuration
 ---
-
 ![](/assets/images/htb-writeup-trick/trick_logo.png)
+
 
 Trick es una máquina Easy Linux que cuenta con un servidor DNS y múltiples vHosts que requieren varios pasos para afianzarse. Requiere conocimientos básicos de DNS para obtener un nombre de dominio y luego subdominio que se puede utilizar para acceder a la primera vHost. En el primer vHost nos encontramos con un sistema de gestión de nóminas que es vulnerable a la inyección SQL. Usando `sqlmap` encontramos que tenemos privilegios de archivo y podemos leer los archivos del sistema. La lectura de un archivo de configuración Nginx revela otro vHost. Este vHost contiene una vulnerabilidad de Inclusión Local de Ficheros (LFI) que puede ser explotada. Enviar un correo a uno de los usuarios con código PHP incrustado y luego incluir ese correo con la LFI permite la Ejecución Remota de Código (RCE). Tras el punto de apoyo inicial encontramos un comando Sudo que puede ser ejecutado sin contraseña. El comando reinicia el servicio `fail2ban`. El directorio de configuración de fail2ban contiene un directorio que es propiedad de un grupo al que pertenece el usuario actual. El usuario tiene acceso de escritura al directorio y puede renombrar un archivo de configuración y reemplazarlo con el suyo propio, lo que lleva a la Ejecución Remota de Código como root una vez que se activa un ban.
 

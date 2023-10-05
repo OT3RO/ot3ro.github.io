@@ -18,8 +18,8 @@ tags:
   - remote file inclusion
   - local file inclusion
 ---
-
 ![](/assets/images/htb-writeup-sniper/sniper_logo.png)
+
 
 Sniper es una máquina Windows de dificultad media que cuenta con un servidor PHP. El servidor aloja un archivo que se encuentra vulnerable a la inclusión local y remota de archivos. La ejecución de comandos se obtiene en el servidor en el contexto de 'NT AUTHORITY\iUSR' a través de la inclusión local de archivos PHP Session maliciosamente diseñados. Las credenciales expuestas de la base de datos se utilizan para obtener acceso como el usuario 'Chris', que tiene la misma contraseña. La enumeración revela que el administrador está revisando archivos CHM (Ayuda HTML compilada), que pueden utilizarse para filtrar el hash NetNTLM-v2 del administrador. Este puede ser capturado, descifrado y utilizado para obtener un shell inverso como administrador utilizando un objeto de credenciales PowerShell.
 
