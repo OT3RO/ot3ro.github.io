@@ -56,7 +56,7 @@ El mensaje "Sorry, direct IP access is not allowed" indica que el acceso directo
 ```
 10.10.10.238 monitors.htb
 ```
-#### <span style="color: gray;">Nmap</span>
+#### <span style="color: gray;">Whatweb</span>
 ```
 ┌─[ot3ro@parrot]─[~/HTB/Monitors]
 └──╼ $whatweb http://monitors.htb/ -v -a 3
